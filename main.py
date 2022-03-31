@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 import pymongo
+from password import PASSWORD
 
 app = FastAPI()
-client = pymongo.MongoClient("mongodb+srv://httpsmilenar:Qw3rtymongo@cluster0.jgp9d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+client = pymongo.MongoClient(f"mongodb+srv://httpsmilenar:{PASSWORD}@cluster0.jgp9d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = client.mila.users
 
 app = FastAPI()
