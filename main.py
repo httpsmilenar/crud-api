@@ -6,36 +6,33 @@ app = FastAPI()
 client = pymongo.MongoClient(f"mongodb+srv://httpsmilenar:{PASSWORD}@cluster0.jgp9d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = client.mila.users
 
-app = FastAPI()
-
 @app.get("/rodrigues")
 async def root():
     return "ok"
 
-# Create 
-@app.post("/cor")
-def create_color(color: dict):
-    print(db)
-    db.insert_one(color)
-    return f"cor adicionada com sucesso!"
+    # Create
+@app.post("/sabor")
+def create_taste(taste: dict):
+    db.insert_one(taste)
+    return "sabor de sorvete adicionado com sucesso!"
 
-# Read
-@app.get("/usuarios/{cor}")
-def read_username(cor: str):
-    user = db.find_one({"cor": cor})
-    if user != None:
-        return "sim, temos essa cor!"
+    # Read
+@app.get("/sabores/{sabor}")
+def read_taste(sabor: str):
+    taste = db.find_one({"sabor": sabor})
+    if taste != None:
+        return "sim. temos esse sabor de sorvete!"
     else:
-        return "cor não encontrada!"
+        return "que pena! não temos esse sabor de sorvete."
 
-# Update
+    # Update
 @app.put("/alterar/")
-def update_username(cor: str, nova_cor: str):
-    db.update_one({"cor": cor}, {"$set": {"cor": nova_cor}})
-    return "cor alterada com sucesso!"
+def update_taste(sabor: str, novo_sabor: str):
+    db.update_one({"sabor": sabor}, {"$set": {"sabor": novo_sabor}})
+    return "sabor alterado com sucesso!"
 
-# Delete
+    # Delete
 @app.delete("/deletar/")
-def delete_username(cor: str):
-    db.delete_one({"cor": cor})
-    return "cor deletada com sucesso!"
+def delete_taste(sabor: str):
+    db.delete_one({"sabor": sabor})
+    return "sabor deletado com sucesso!"
